@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: security
+            operator: In
+            values:
+            - demo
+        topologyKey: "kubernetes.io/hostname"
+  containers:
+  - name: container-2
+    image: gcr.io/google-samples/node-hello:1.0
